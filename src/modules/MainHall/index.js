@@ -1,5 +1,6 @@
 import { connect } from "react-redux";
 import MainHall from "./components/MainHall";
+import * as actions from "modules/MainHall/actions/mainHall";
 
 
 
@@ -9,4 +10,4 @@ const mapStateToProps = (state) => {
     }
 };
 
-export default connect(mapStateToProps)(MainHall);
+export default connect(mapStateToProps, actions)(MainHall);

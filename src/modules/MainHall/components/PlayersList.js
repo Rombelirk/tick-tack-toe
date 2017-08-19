@@ -1,6 +1,6 @@
 import React from "react";
 import "../styles/MainHall.scss";
-import io from "socket.io-client";
+import socket from "src/socket";
 
 
 export default class PlayersList extends React.Component{
@@ -11,19 +11,23 @@ export default class PlayersList extends React.Component{
     }
 
     componentDidMount() {
-        this.socket = io('http://localhost:3000');
-        console.log(this.socket);
-        this.socket.emit("hui", {data: "hui"});
+        socket.emit('works', {data: "it works!"});
     }
 
     render() {
 
 
         return(
-            <div className="main-hall-container">
-                {
-                    this.props.playersList.map(el => <div>{el.playerName}</div>)
-                }
+            <div>
+                <h3>
+                    Players List:
+                </h3>
+
+                <div className="main-hall-container">
+                    {
+                        this.props.playersList.map(el => <div key={el.playerName}>{el.playerName}</div>)
+                    }
+                </div>
             </div>
         )
     }

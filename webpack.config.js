@@ -21,7 +21,8 @@ module.exports = {
         alias: {
             bootstrap: './node_modules/bootstrap-sass',
             modules: __dirname+'/src/modules',
-            assets: __dirname+'/src/assets'
+            assets: __dirname+'/src/assets',
+            src: __dirname+'/src'
         },
         extensions: ['.js', '.jsx', '.css']
     },
@@ -52,18 +53,6 @@ module.exports = {
                     }],
                     fallback: "style-loader"
                 })
-            },
-            {
-                test: /\.(png|svg|jpg|gif)$/,
-                use: [
-                    'file-loader'
-                ]
-            },
-            {
-                test: /\.(woff|woff2|eot|ttf|otf)$/,
-                use: [
-                    'file-loader'
-                ]
             }
         ]
     },

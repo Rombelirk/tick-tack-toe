@@ -12,24 +12,31 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.get('/', function (req, res) {
+app.get('/',  (req, res) => {
     res.sendFile(__dirname + '/public/index.html');
 });
 
-var connections = [];
+let playersList = [];
 
-io.on('connection', function (socket) {
+io.on('connection', socket => {
 
-    connections.push(socket.id);
-    io.emit("newPlayer", {data: connections});
+    playersList.push({playerId : socket.id, playerName: "Unknown Player"});
+    io.emit("getPlayersList", {playersList});
 
 
-    socket.on('buttonPressed', function (data) {
+    socket.on('disconnect', data => {
 
-        socket.emit("back", {data: "в обраточку"});
-    });
-    socket.on('hui', function (data) {
-        console.log(data);
+        playersList.splice(playersList.findIndex(el => el.playerId === socket.id), 1);
+        io.emit("getPlayersList", {playersList});
 
     });
+
+    socket.on("setPlayerName", data => {
+
+        playersList[playersList.findIndex(el => el.playerId === socket.id)].playerName = data.name;
+        io.emit("getPlayersList", {playersList});
+    });
+
+
+
 });
