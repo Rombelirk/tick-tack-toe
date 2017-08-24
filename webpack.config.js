@@ -12,7 +12,7 @@ module.exports = {
 
 
     devtool: "source-map",
-    entry: path.resolve(__dirname, './src/app.js'),
+    entry: path.resolve(__dirname, './client/app.js'),
     output: {
         path: path.resolve(__dirname),
         filename: 'public/bundle.js'
@@ -20,9 +20,10 @@ module.exports = {
     resolve: {
         alias: {
             bootstrap: './node_modules/bootstrap-sass',
-            modules: __dirname+'/src/modules',
-            assets: __dirname+'/src/assets',
-            src: __dirname+'/src'
+            modules: __dirname+'/client/modules',
+            assets: __dirname+'/client/assets',
+            src: __dirname+'/client',
+            pub: __dirname+'/public'
         },
         extensions: ['.js', '.jsx', '.css']
     },
@@ -53,6 +54,18 @@ module.exports = {
                     }],
                     fallback: "style-loader"
                 })
+            },
+            {
+                test: /\.(png|svg|jpg|gif)$/,
+                use: [
+                    'file-loader'
+                ]
+            },
+            {
+                test: /\.(woff|woff2|eot|ttf|otf)$/,
+                use: [
+                    'file-loader'
+                ]
             }
         ]
     },

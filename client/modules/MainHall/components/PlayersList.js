@@ -25,7 +25,7 @@ export default class PlayersList extends React.Component{
 
                 <div className="main-hall-container">
                     {
-                        this.props.playersList.map(el => <div key={el.playerName}>{el.playerName}</div>)
+                        this.props.playersList.map(el => <div key={el.playerId}>{el.playerName}</div>)
                     }
                 </div>
             </div>
