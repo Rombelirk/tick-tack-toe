@@ -15,7 +15,6 @@ export const setPlayerName = (name) => {
 
 export const searchGame = () => {
     return (dispatch) => {
-        console.log("act");
         socket.emit("startGameSearching");
     }
 };
@@ -25,7 +24,8 @@ export const searchGame = () => {
 export const gameIsFound = (data) => {
     return (dispatch) => {
 
-        dispatch({type: "GAME_IS_FOUND", data})
+        dispatch({type: "GAME_IS_FOUND"});
+        dispatch({type: "LOAD_GAME_DATA", data})
     }
 };
 

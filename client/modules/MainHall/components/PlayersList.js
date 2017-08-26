@@ -6,8 +6,6 @@ import socket from "src/socket";
 export default class PlayersList extends React.Component{
     constructor(props) {
         super(props);
-
-
     }
 
     componentDidMount() {

@@ -5,7 +5,11 @@ const initialState = {
     playersList: [
 
     ],
-    gameFound : false
+    gameFound : false,
+    currentGame: {
+
+        opponentsName: ""
+    }
 };
 
 export const mainHallReducer = (state = initialState, action) => {
@@ -15,8 +19,6 @@ export const mainHallReducer = (state = initialState, action) => {
             break;
 
         case "GAME_IS_FOUND":
-            console.log("game is found");
-
             return {...state, gameFound: true};
             break;
 

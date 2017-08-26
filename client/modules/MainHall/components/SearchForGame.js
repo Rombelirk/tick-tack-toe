@@ -4,8 +4,6 @@ import React from "react";
 export default class SearchForGame extends React.Component{
     constructor(props) {
         super(props);
-
-
     }
 
 
@@ -13,10 +11,7 @@ export default class SearchForGame extends React.Component{
     render() {
         let that = this;
         return(
-
-                <button onClick={that.props.searchGame}>Search for Game</button>
-
-
+            <button onClick={that.props.searchGame}>Search for Game</button>
         )
     }
 }
