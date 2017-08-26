@@ -1,6 +1,12 @@
 import server from "./server";
 import socketIo from "socket.io";
 import uuid from "uuid";
+import {
+    playerConnected,
+    playerDisconnected,
+    setPlayerName,
+    startGameSearching
+} from "./actions/mainHallActions";
 
 const io = socketIo(server);
 
@@ -8,28 +14,20 @@ const playersList = [],
     playersSearchingForGame = [],
     currentGames = {};
 
+export default io;
+
 
 io.on('connection', socket => {
 
-    playersList.push({playerId: socket.id, playerName: "Unknown Player"});
-    io.emit("getPlayersList", {playersList});
+    playerConnected(socket.id);
 
+    socket.on('disconnect', () => playerDisconnected(socket.id));
 
-    socket.on('disconnect', data => {
+    socket.on("setPlayerName", data => setPlayerName(socket.id, data.name));
 
-        playersList.splice(playersList.findIndex(el => el.playerId === socket.id), 1);
-        io.emit("getPlayersList", {playersList});
+    socket.on("startGameSearching", () => {
 
-    });
-
-    socket.on("setPlayerName", data => {
-
-        playersList[playersList.findIndex(el => el.playerId === socket.id)].playerName = data.name;
-        io.emit("getPlayersList", {playersList});
-
-    });
-
-    socket.on("startGameSearching", data => {
+        startGameSearching(socket);
 
         //check if there is an opponent in the queue
 
@@ -41,17 +39,13 @@ io.on('connection', socket => {
 
             let opponent = playersSearchingForGame.splice(0, 1)[0];
 
-
             // playersSearchingForGame.splice(playersList.findIndex(el => el.playerId === socket.id), 1);
             let newGameId = uuid();
             currentGames[newGameId] = {opponents: [opponent.playerId, socket.id]};
 
-
-
             //send game data to socket's opponent
 
             socket.to(opponent.playerId).emit('gameFound', {
-
                     game: {
                         [newGameId]: Object.assign({}, currentGames[newGameId])
                     },
@@ -59,38 +53,25 @@ io.on('connection', socket => {
                         name: playersList[playersList.findIndex(el => el.playerId === socket.id)].playerName,
                         id: socket.id
                     }
-
-
-
-
             });
 
             //send game data to the socket itself
 
             socket.emit('gameFound', {
-
                     game: {
                         [newGameId]: Object.assign({}, currentGames[newGameId])
-
                     },
                     opponent: {
-
                         name: opponent.playerName,
                         id: opponent.playerId
-
                     }
-
             });
-
         }
     });
 
     socket.on("stopGameSearching", data => {
-
         playersSearchingForGame.splice(playersList.findIndex(el => el.playerId === socket.id), 1);
     });
-
-
 });
 
-export default io;
+
