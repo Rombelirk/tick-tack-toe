@@ -1,5 +1,4 @@
 import React from "react";
-import "../styles/MainHall.scss";
 import socket from "src/socket";
 
 
@@ -19,12 +18,12 @@ export default class PlayersList extends React.Component{
         }
 
         return(
-            <div>
+            <div className="players-list">
                 <h3>
                     Players List:
                 </h3>
 
-                <div className="main-hall-container">
+                <div>
                     {
                         players.map(el => <div key={el.playerId}>{el.playerName}</div>)
                     }

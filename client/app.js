@@ -5,6 +5,7 @@ import {Provider} from "react-redux";
 import {BrowserRouter as Router ,Route} from 'react-router-dom';
 import store from "./store/store";
 import "../node_modules/bootstrap-sass/assets/stylesheets/_bootstrap.scss";
+import "../node_modules/font-awesome/scss/font-awesome.scss";
 import MainHall from "modules/MainHall";
 import GameInterface from "modules/GameInterface";
 

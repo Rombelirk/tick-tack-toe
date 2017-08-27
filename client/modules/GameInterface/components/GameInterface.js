@@ -8,7 +8,7 @@ export default class MainHall extends React.Component{
     render() {
         return(
             <div>
-                Your opponent is {this.props.gameInterface.opponentsName}!
+                <p className="bg-info game-alert">Your opponent is {this.props.gameInterface.opponentsName}!</p>
             </div>
         )
     }

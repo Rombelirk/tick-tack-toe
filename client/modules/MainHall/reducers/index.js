@@ -2,6 +2,7 @@ const initialState = {
     playersList: {
 
     },
+    searchingForGame: false,
     gameFound : false,
     currentGame: {
 
@@ -17,6 +18,17 @@ export const mainHallReducer = (state = initialState, action) => {
 
         case "GAME_IS_FOUND":
             return {...state, gameFound: true};
+            break;
+
+        case "QUIT_GAME":
+            return {...state, gameFound: false};
+
+        case "GAME_SEARCH_STARTED":
+            return {...state, searchingForGame: true};
+            break;
+
+        case "GAME_SEARCH_STOPPED":
+            return {...state, searchingForGame: false};
             break;
 
         default:

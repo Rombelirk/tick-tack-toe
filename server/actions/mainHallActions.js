@@ -18,12 +18,16 @@ export const setPlayerName = (id, name) => {
 };
 
 export const startGameSearching = (socket) => {
-    let playersSearchingForGame = store.getState().mainHall.playersSearchingForGame.slice(),
-        currentGames = Object.assign({}, store.getState().mainHall.currentGames),
-        playersList = Object.assign({}, store.getState().mainHall.playersList);
+    let playersSearchingForGame = store.getState().mainHall.playersSearchingForGame,
+        currentGames = store.getState().mainHall.currentGames,
+        playersList = store.getState().mainHall.playersList;
+
+    console.log("playersSearchingForGame", playersSearchingForGame);
 
     if (playersSearchingForGame.length === 0) {
         store.dispatch({type: "ADD_PLAYER_TO_QUEUE", id: socket.id});
+        socket.emit('gameSearchStarted');
+
     } else {
         //todo: try with comma
         let newGameId = uuid(),
@@ -34,7 +38,7 @@ export const startGameSearching = (socket) => {
             {type: "CREATE_MATCH_PAIR", data: {newGameId, id: [socket.id, opponentId]}}
         );
 
-
+        socket.to(opponentId).emit('gameSearchStopped');
         socket.to(opponentId).emit('gameFound', {
             game: {
                 [newGameId]: currentGames[newGameId]
@@ -45,6 +49,7 @@ export const startGameSearching = (socket) => {
             }
         });
 
+        socket.emit('gameSearchStopped');
         socket.emit('gameFound', {
             game: {
                 [newGameId]: currentGames[newGameId]
@@ -54,5 +59,13 @@ export const startGameSearching = (socket) => {
                 id: opponentId
             }
         });
+
+
+
     }
+};
+
+export const stopGameSearching = (socket) => {
+    store.dispatch({type: "REMOVE_PLAYERS_FROM_QUEUE", id: socket.id});
+    socket.emit('gameSearchStopped');
 };

@@ -15,16 +15,29 @@ export default class MainHall extends React.Component{
             this.props.gameIsFound(data);
 
         });
+        socket.on('gameSearchStarted', () => {
+            this.props.gameSearchStarted();
+        });
+        socket.on('gameSearchStopped', () => {
+            this.props.gameSearchStopped();
+        });
+    }
+
+    componentDidUnmount() {
+        this.props.quitGame();
     }
 
 
 
     render() {
         return(
-            <div>
+            <div className="container main-hall">
                 <PlayersList playersList={this.props.mainHall.playersList}/>
                 <NameInput submit={this.props.setPlayerName} />
-                <SearchForGame searchGame = {this.props.searchGame}/>
+                <SearchForGame stopGameSearching={this.props.stopGameSearching}
+                               startGameSearching={this.props.startGameSearching}
+                               searchingForGame={this.props.mainHall.searchingForGame}
+                />
             </div>
 
         )

@@ -12,9 +12,27 @@ export const setPlayerName = (name) => {
     }
 };
 
-export const searchGame = () => {
-    return (dispatch) => {
+export const startGameSearching = () => {
+    return () => {
         socket.emit("startGameSearching");
+    }
+};
+
+export const stopGameSearching = () => {
+    return () => {
+        socket.emit("stopGameSearching");
+    }
+};
+
+export const gameSearchStarted = () => {
+  return (dispatch) => {
+      dispatch({type: "GAME_SEARCH_STARTED"});
+  }
+};
+
+export const gameSearchStopped = () => {
+    return (dispatch) => {
+        dispatch({type: "GAME_SEARCH_STOPPED"});
     }
 };
 
@@ -23,8 +41,17 @@ export const searchGame = () => {
 export const gameIsFound = (data) => {
     return (dispatch) => {
         dispatch({type: "GAME_IS_FOUND"});
-        dispatch({type: "LOAD_GAME_DATA", data})
+        dispatch({type: "LOAD_GAME_DATA", data});
     }
 };
+
+export const quitGame = () => {
+  return (dispatch) => {
+      dispatch({type: "QUIT_GAME"});
+  }
+};
+
+
+
 
 

@@ -1,15 +1,15 @@
 const path = require("path"),
     ExtractTextPlugin = require('extract-text-webpack-plugin'),
     extractSass = new ExtractTextPlugin({
-        filename: "public/bundle.css"
+        filename: "bundle.css"
     });
 
 module.exports = {
     devtool: "source-map",
     entry: path.resolve(__dirname, './client/app.js'),
     output: {
-        path: path.resolve(__dirname),
-        filename: 'public/bundle.js'
+        path: path.resolve(__dirname, "public"),
+        filename: 'bundle.js'
     },
     resolve: {
         alias: {
@@ -50,24 +50,21 @@ module.exports = {
                 })
             },
             {
-                test: /\.(png|svg|jpg|gif)$/,
-                loader: 'file-loader',
-                options: {
-                    name: './public/images/[name].[ext]?[hash]'
-                }
+                test: /\.(jpe?g|png|gif|svg)$/i,
+                use: [
+                    'file-loader?name=images/[name].[ext]',
+                    'image-webpack-loader?bypassOnDebug'
+                ]
             },
-            {
-                test: /\.(woff|woff2|eot|ttf|otf)$/,
-                loader: 'file-loader',
-                options: {
-                    name: './public/fonts/[name].[ext]?[hash]'
-                }
-            }
+            { test: /\.(woff2?)$/, use: 'url-loader?limit=10000&name=fonts/[name].[ext]' },
+            { test: /\.(ttf|eot)$/, use: 'file-loader?name=fonts/[name].[ext]' },
+            // Bootstrap 3
+            { test:/bootstrap-sass[\/\\]assets[\/\\]javascripts[\/\\]/, use: 'imports-loader?jQuery=jquery' }
         ]
     },
     plugins: [
         new ExtractTextPlugin({
-            filename: 'public/bundle.css'
+            filename: 'bundle.css'
         }),
         extractSass
     ]

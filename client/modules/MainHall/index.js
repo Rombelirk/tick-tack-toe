@@ -1,6 +1,8 @@
 import { connect } from "react-redux";
 import MainHallWithRouter from "./containers/MainHallWithRouter";
 import * as actions from "modules/MainHall/actions/mainHall";
+import "./styles/MainHall.scss";
+
 
 const mapStateToProps = (state) => {
     return {
