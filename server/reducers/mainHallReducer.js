@@ -5,6 +5,7 @@ const initialState = {
 };
 
 export const mainHallReducer = (state = initialState, action) => {
+
     const playersList = Object.assign({}, state.playersList),
         playersSearchingForGame = state.playersSearchingForGame.slice();
     switch (action.type) {
@@ -42,6 +43,7 @@ export const mainHallReducer = (state = initialState, action) => {
 
 
         default:
+            return state;
 
     }
 };

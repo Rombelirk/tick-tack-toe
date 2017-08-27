@@ -11,16 +11,14 @@ import GameInterface from "modules/GameInterface";
 
 ReactDOM.render(
     <div>
-
-            <Provider store={store}>
-                <Router>
-                    <div>
-                        <Route exact path='/' component={MainHall}/>
-                        <Route path='/game' component={GameInterface}/>
-                    </div>
-                </Router>
-            </Provider>
-
+        <Provider store={store}>
+            <Router>
+                <div>
+                    <Route exact path='/' component={MainHall}/>
+                    <Route path='/game' component={GameInterface}/>
+                </div>
+            </Router>
+        </Provider>
     </div>
     , document.getElementById("root")
 );

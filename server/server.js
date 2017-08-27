@@ -1,9 +1,7 @@
-
 import express from "express";
 import bodyParser from "body-parser";
 import path from "path";
 import http from "http";
-
 
 const app = express();
 const server = http.Server(app);

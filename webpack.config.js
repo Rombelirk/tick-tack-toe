@@ -1,16 +1,10 @@
-var path = require("path");
-
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-
-
-const extractSass = new ExtractTextPlugin({
-    filename: "public/bundle.css"
-});
+const path = require("path"),
+    ExtractTextPlugin = require('extract-text-webpack-plugin'),
+    extractSass = new ExtractTextPlugin({
+        filename: "public/bundle.css"
+    });
 
 module.exports = {
-
-
-
     devtool: "source-map",
     entry: path.resolve(__dirname, './client/app.js'),
     output: {
@@ -57,15 +51,17 @@ module.exports = {
             },
             {
                 test: /\.(png|svg|jpg|gif)$/,
-                use: [
-                    'file-loader'
-                ]
+                loader: 'file-loader',
+                options: {
+                    name: './public/images/[name].[ext]?[hash]'
+                }
             },
             {
                 test: /\.(woff|woff2|eot|ttf|otf)$/,
-                use: [
-                    'file-loader'
-                ]
+                loader: 'file-loader',
+                options: {
+                    name: './public/fonts/[name].[ext]?[hash]'
+                }
             }
         ]
     },

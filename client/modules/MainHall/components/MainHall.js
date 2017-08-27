@@ -7,12 +7,9 @@ import NameInput from "modules/MainHall/components/NameInput";
 export default class MainHall extends React.Component{
     constructor(props) {
         super(props);
-
-
     }
 
     componentDidMount() {
-
         socket.on('getPlayersList', data => this.props.setPlayerList(data.playersList));
         socket.on ('gameFound', data => {
             this.props.gameIsFound(data);
@@ -23,7 +20,6 @@ export default class MainHall extends React.Component{
 
 
     render() {
-
         return(
             <div>
                 <PlayersList playersList={this.props.mainHall.playersList}/>

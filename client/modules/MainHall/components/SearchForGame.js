@@ -6,8 +6,6 @@ export default class SearchForGame extends React.Component{
         super(props);
     }
 
-
-
     render() {
         let that = this;
         return(

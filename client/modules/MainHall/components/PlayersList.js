@@ -13,7 +13,10 @@ export default class PlayersList extends React.Component{
     }
 
     render() {
-
+        let players = [];
+        for (let key in this.props.playersList) {
+            players.push({playerId: key, playerName:this.props.playersList[key].playerName})
+        }
 
         return(
             <div>
@@ -23,7 +26,7 @@ export default class PlayersList extends React.Component{
 
                 <div className="main-hall-container">
                     {
-                        this.props.playersList.map(el => <div key={el.playerId}>{el.playerName}</div>)
+                        players.map(el => <div key={el.playerId}>{el.playerName}</div>)
                     }
                 </div>
             </div>

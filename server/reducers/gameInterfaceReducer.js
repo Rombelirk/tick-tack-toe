@@ -8,6 +8,7 @@ export const gameInterfaceReducer = (state = initialState, action) => {
             break;
 
         default:
+            return state;
 
     }
 };

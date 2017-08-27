@@ -1,10 +1,7 @@
-
-import * as constants from "src/constants/index";
-
 const initialState = {
-    playersList: [
+    playersList: {
 
-    ],
+    },
     gameFound : false,
     currentGame: {
 

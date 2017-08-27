@@ -1,4 +1,3 @@
-// import * as constants from "src/constants";
 import socket from "src/socket";
 
 export const setPlayerList = (players) => {
@@ -23,7 +22,6 @@ export const searchGame = () => {
 
 export const gameIsFound = (data) => {
     return (dispatch) => {
-
         dispatch({type: "GAME_IS_FOUND"});
         dispatch({type: "LOAD_GAME_DATA", data})
     }
