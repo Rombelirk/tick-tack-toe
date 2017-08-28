@@ -45,11 +45,6 @@ export const gameIsFound = (data) => {
     }
 };
 
-export const quitGame = () => {
-  return (dispatch) => {
-      dispatch({type: "QUIT_GAME"});
-  }
-};
 
 
 

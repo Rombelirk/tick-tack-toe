@@ -23,9 +23,7 @@ export default class MainHall extends React.Component{
         });
     }
 
-    componentDidUnmount() {
-        this.props.quitGame();
-    }
+
 
 
 

@@ -5,6 +5,10 @@ export default class MainHall extends React.Component{
         super(props);
     }
 
+    componentWillUnmount() {
+        this.props.quitGame();
+    }
+
     render() {
         return(
             <div>

@@ -22,8 +22,6 @@ export const startGameSearching = (socket) => {
         currentGames = store.getState().mainHall.currentGames,
         playersList = store.getState().mainHall.playersList;
 
-    console.log("playersSearchingForGame", playersSearchingForGame);
-
     if (playersSearchingForGame.length === 0) {
         store.dispatch({type: "ADD_PLAYER_TO_QUEUE", id: socket.id});
         socket.emit('gameSearchStarted');
