@@ -1,8 +1,9 @@
 import server from "./server";
+import config from "config";
 import io from "./socket";
 
-server.listen(3000);
-console.log("listening on port 3000...");
+server.listen(config.port);
+console.log("listening on port " + config.port + "...");
 
 
 
